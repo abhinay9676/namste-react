@@ -1,49 +1,4 @@
-import React from "react";
-import ReactDOM from "react-dom";
 
-
-
-const Header=()=>{
-    return(
-        <div className="header">
-            <div className="logo">
-            <img src="https://i.pinimg.com/originals/3d/a0/00/3da000e71ddc31ec29da41266b182ade.jpg" alt="photu" width="100" height="100"/>
-            </div>
-            <div className="nav-items">
-              <ul>
-                <li>Home</li>
-                <li>About</li>
-                <li>Cart</li>
-              </ul>
-            </div>
-        </div>
-    )
-}
-
-const RestaurantCard=(props)=>{
-    const { resData } = props;
-
-    const { name,cloudinaryImageId,costForTwo,cuisines,avgRating} = resData?.info;
-    return(
-        <div className="res-card">
-         <div className="res-logo">
-           <img
-             className="res-logo"
-             alt="res-logo"
-            src={"https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy,f_auto,q_auto,w_660/"+resData.info.cloudinaryImageId}
-           />
-           <div className="res-details">
-           <h3>{resData?.info?.name}</h3>
-           <h4>{resData?.info?.cuisines.join(", ")}</h4>
-           <h4>{resData?.info?.avgRating}</h4>
-            <h5>{resData?.info?.costForTwo}</h5> 
-           </div>
-           
-           
-         </div>
-        </div>
-    )
-}
 
 const resList = [
     {
@@ -58,7 +13,7 @@ const resList = [
             "Burgers",
             "American"
           ],
-          "avgRating": 4.3,
+          "avgRating": 3,
           "parentId": "166",
           "avgRatingString": "4.3",
           "totalRatingsString": "3.8K+",
@@ -155,7 +110,7 @@ const resList = [
             "Cafe",
             "Desserts"
           ],
-          "avgRating": 4.5,
+          "avgRating": 3.5,
           "parentId": "630",
           "avgRatingString": "4.5",
           "totalRatingsString": "22K+",
@@ -339,7 +294,7 @@ const resList = [
             "Pastas",
             "Desserts"
           ],
-          "avgRating": 4.4,
+          "avgRating": 3.4,
           "parentId": "2456",
           "avgRatingString": "4.4",
           "totalRatingsString": "5.4K+",
@@ -462,7 +417,7 @@ const resList = [
             "Desserts",
             "Beverages"
           ],
-          "avgRating": 4.4,
+          "avgRating": 3.4,
           "parentId": "21809",
           "avgRatingString": "4.4",
           "totalRatingsString": "21K+",
@@ -1135,35 +1090,5 @@ const resList = [
         }
       },
 ]
-    
-        
-          
-         
 
-
-
-const Body=()=>{
-    return(
-        <div className="body">
-            <div className="search">
-              <h2> search</h2>
-            </div>
-            <div className="res-container">
-             { resList.map((restaurant=>(<RestaurantCard resData={restaurant}/>)))};
-              
-            </div>
-
-        </div>
-    )
-}
-
-const AppLayout =()=>{
-   return <div className="App">
-      <Header/>
-      <Body/>
-    </div>
-}
-
-const root = ReactDOM.createRoot(document.getElementById("root"));
-
-root.render(<AppLayout/>);
+export default resList;

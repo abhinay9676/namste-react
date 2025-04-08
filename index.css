@@ -31,12 +31,15 @@
 }
 
 .logo{
-    /* padding: 6px 4px 0px 0px; */
-
     width: 100px;
-    height: 30px; 
-
+    height: 100px;
 }
+
+.image-style{
+    height: 100px;
+    width: 100px;
+}
+
 
 
 
@@ -76,4 +79,9 @@
 
 .res-logo{
     width: 100%;
+}
+
+.filter-btn{
+  margin: 10px;
+  cursor: pointer;
 }
