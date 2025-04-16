@@ -48,10 +48,10 @@ const Body=()=>{
 
     return(
         <div className="body">
-            <div className="filter">
-                <div className="search-text">
-                 <input type="text" placeholder="search" value={searchText} onChange={(e)=>{setSearchText(e.target.value)}}/>
-                <button className="btn" type="submit" onClick={()=>{
+            <div className="flex">
+                <div className="search-text m-4 p-4">
+                 <input type="text" className="border border-solid border-black" placeholder="search" value={searchText} onChange={(e)=>{setSearchText(e.target.value)}}/>
+                <button className="px-4 py-2 bg-green-100 m-4 rounded-lg" type="submit" onClick={()=>{
                     const filteredRestautrant=restaurantList.filter(restaurants=> restaurants.info.name.toLowerCase().includes(searchText.toLowerCase()));
                    
                     console.log(searchText);
@@ -66,12 +66,16 @@ const Body=()=>{
                 >search</button>
                 </div>
 
-             <button className="filter-btn"onClick={()=>{
-                const filteredList=restaurantList.filter(res=>res.info.avgRating > 4.6);
-                setRestaurantList(filteredList);
-             }}>Top rated restaurants</button>
+                <div className="earch m-4 p-4 flex items-center">
+                      <button className="px-4 py-2 bg-green-100 m-4 rounded-lg" onClick={()=>{
+                      const filteredList=restaurantList.filter(res=>res.info.avgRating > 4.6);
+                      setRestaurantList(filteredList);
+                    }}>Top rated restaurants</button>
+                </div>
+
+             
             </div>
-            <div className="res-container">
+            <div className="flex flex-wrap">
               {filteredRestautrant.length === 0 ? (
                <h1>No Search Found</h1>
               ) : (
