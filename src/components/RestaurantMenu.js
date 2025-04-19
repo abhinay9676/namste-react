@@ -3,9 +3,14 @@ import Shimmer from "./Shimmer";
 import { useParams } from "react-router-dom";
 import { MENU_IMG_URL } from "../utils/constants";
 import useRestaurantMenu from "../utils/useRestaurantMenu";
+import RestaurantCategory from "./RestaurantCategory";
+import { useState } from "react";
 
 
 const RestaurantMenu = () => {
+const [showIndex,setShowIndex] = useState(null);
+
+const dummy = "Dummy Data";
   
 
   const { id }=useParams();
@@ -23,7 +28,14 @@ const RestaurantMenu = () => {
 // const  itemCards  = resInfo?.cards?.[4]?.groupCard?.cardGroupMap?.REGULAR?.cards?.[1]?.card?.card;
 const itemCards = resInfo?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards?.[1]?.card?.card?.itemCards;
 
-console.log(itemCards);
+
+
+const categories = resInfo?.cards?.[4]?.groupedCard?.cardGroupMap?.REGULAR?.cards.filter(
+  (c) =>
+    c.card?.card?.["@type"] == "type.googleapis.com/swiggy.presentation.food.v2.ItemCategory"
+);
+
+// console.log(categories);
  
 
 
@@ -33,32 +45,28 @@ console.log(itemCards);
 
 
   return (
-    <div className="rest">
-      <div className="res-name">
-        <h2>{name}</h2>
-        <h3>{costForTwoMessage}</h3>
-      </div>
-      <div className="menu">
-        <ul>
-        {itemCards.map((item) => (
-          <li key={item?.card?.info?.id}>
-            <h3>{item?.card?.info?.name}</h3>
-            <p>₹ {item?.card?.info?.price / 100 || item?.card?.info?.defaultPrice / 100}</p>
-            {item?.card?.info?.description && <p>{item?.card?.info?.description}</p>}
-            <img
-                className="res-img"
-                alt="res-logo"
-                src={MENU_IMG_URL+item?.card?.info?.imageId
-                }
-            />
-          </li>
+    <div className="text-center">
+     
+        <h2 className="font-bold my-10 text-2xl">{name}</h2>
+        <h3 className="font-bold text-xl mx-5">{costForTwoMessage}</h3>
+        {/* categories accordions */}
+        {categories.map((category,index)=>(
+          <RestaurantCategory key={category?.card?.card.title} 
+          data={category?.card?.card}
+          showItem={index == showIndex ? true : false}
+          setShowIndex={()=>setShowIndex(index)}
+          dummy={dummy}
+          />
         ))}
-        </ul>
       </div>
       
-    </div>
+      
+      
+  
   )
 };
+
+
 
 export default RestaurantMenu;
 

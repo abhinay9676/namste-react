@@ -1,4 +1,4 @@
-import RestaurantCard from "./RestaurantCard";
+import RestaurantCard,{withAggregatedDiscount} from "./RestaurantCard";
 import { useEffect, useState } from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
@@ -7,10 +7,14 @@ import useOnlineStatus from "../utils/useOnlineStatus";
 
 
 const Body=()=>{
+    
 
     const [restaurantList  ,setRestaurantList]=useState([]);
     const [filteredRestautrant, setFilteredRestaurant] = useState([]);
     const [searchText , setSearchText] = useState("");
+
+
+   
    
     
 
@@ -30,7 +34,7 @@ const Body=()=>{
      setRestaurantList(cardData);
      setFilteredRestaurant(cardData);
     };
-    
+     const RestaurantDiscount = withAggregatedDiscount(RestaurantCard);
 
     const onlineStatus = useOnlineStatus();
 
@@ -81,7 +85,8 @@ const Body=()=>{
               ) : (
              filteredRestautrant.map((restaurant) => (
               <Link key={restaurant.info.id} to={"/restaurants/" + restaurant.info.id}>
-                  <RestaurantCard resData={restaurant} />
+                                {restaurant.info.aggregatedDiscountInfoV3? (<RestaurantDiscount  resData={restaurant} /> ): (<RestaurantCard resData={restaurant} />)}
+                  
              </Link>
        ))
     )}
