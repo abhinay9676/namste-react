@@ -1,8 +1,9 @@
 import RestaurantCard,{withAggregatedDiscount} from "./RestaurantCard";
-import { useEffect, useState } from "react";
+import { useEffect, useState ,useContext} from "react";
 import Shimmer from "./Shimmer";
 import { Link } from "react-router-dom";
 import useOnlineStatus from "../utils/useOnlineStatus";
+// import UserContext from "../utils/UserContext";
 
 
 
@@ -12,7 +13,9 @@ const Body=()=>{
     const [restaurantList  ,setRestaurantList]=useState([]);
     const [filteredRestautrant, setFilteredRestaurant] = useState([]);
     const [searchText , setSearchText] = useState("");
+    
 
+    // const {loggedInUser,setUserInfo} = useContext(UserContext)
 
    
    
@@ -69,6 +72,10 @@ const Body=()=>{
                 }
                 >search</button>
                 </div>
+                {/* <div>
+                    <input className="border border-solid border-black" value={loggedInUser} onChange={(e)=>{setUserInfo(e.target.value)}}
+                    />
+                </div> */}
 
                 <div className="earch m-4 p-4 flex items-center">
                       <button className="px-4 py-2 bg-green-100 m-4 rounded-lg" onClick={()=>{
